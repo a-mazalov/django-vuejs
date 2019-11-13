@@ -16,17 +16,18 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-            'id',
-            'username',
-            'first_name',
-            'last_name',
-            'posts',
-        )
+        fields = '__all__'
+        # fields = (
+        #     'id',
+        #     'username',
+        #     'first_name',
+        #     'last_name',
+        #     'posts',
+        # )
 
 
 class PostSerializer(ModelSerializer):
-
+    # all_posts = DevelopmentSerializer(read_only=True) 
     author = HyperlinkedRelatedField(view_name='user-detail', read_only=True)
 
     def get_validation_exclusions(self, *args, **kwargs):

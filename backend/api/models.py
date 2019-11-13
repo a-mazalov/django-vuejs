@@ -36,3 +36,34 @@ class Post(Model):
     content = TextField(blank=True, null=True)
     title = CharField(max_length=255)
     updated = DateTimeField(auto_now=True)
+
+
+class Courses(models.Model):
+    name = models.CharField(max_length=200)
+    
+    DIRECTION_STATUS = (
+        ('h', 'html'),
+        ('j', 'js'),
+        ('p', 'php'),
+        ('py', 'python'),
+    )
+
+    direction = models.CharField(max_length=1, choices=DIRECTION_STATUS, blank=True, default='py', help_text='Направление курса')
+    date_start = models.DateField(null=True, blank=True)
+    date_start_registration = models.DateField('Начало регистрации', null=True, blank=True)
+
+    LEVEL_STATUS = (
+        ('j', 'Junior'),
+        ('m', 'Middle'),
+        ('s', 'Senior'),
+        ('l', 'Lead'),
+    )
+
+    level = models.CharField(max_length=1, choices=LEVEL_STATUS, blank=True, default='j', help_text='Уровень курса')
+    duration = models.IntegerField(null=True, blank=True)
+    description = models.TextField(null=True, max_length=2000, help_text="Описание курса")
+
+class CourseParticipants(models.Model):
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
+    id_course = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True) 
+
