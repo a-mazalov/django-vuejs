@@ -39,7 +39,7 @@ class Post(Model):
 
 
 class Course(models.Model):
-    members = ManyToManyField(User, related_name='members_list', blank=True)
+    members = ManyToManyField(User, related_name='courses', blank=True)
 
     name = models.CharField(max_length=200)
     
@@ -67,8 +67,4 @@ class Course(models.Model):
 
     created = DateTimeField(auto_now_add=True)
     updated = DateTimeField(auto_now=True)
-
-# class CourseParticipants(models.Model):
-#     id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
-#     id_course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True) 
 

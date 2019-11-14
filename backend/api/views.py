@@ -45,7 +45,7 @@ class UserViewSet(ModelViewSet):
         IsAuthenticated,
     )
 
-    # Детеил /api/users/2/posts/
+    # Детеил для /api/users/2/posts/
     @detail_route(methods=['get'])
     def posts(self, request, pk=None):
         queryset = Post.objects.filter(author__pk=pk).order_by('-created')
