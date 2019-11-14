@@ -38,7 +38,9 @@ class Post(Model):
     updated = DateTimeField(auto_now=True)
 
 
-class Courses(models.Model):
+class Course(models.Model):
+    members = ManyToManyField(User, related_name='members_list', blank=True)
+
     name = models.CharField(max_length=200)
     
     DIRECTION_STATUS = (
@@ -48,7 +50,7 @@ class Courses(models.Model):
         ('py', 'python'),
     )
 
-    direction = models.CharField(max_length=1, choices=DIRECTION_STATUS, blank=True, default='py', help_text='Направление курса')
+    direction = models.CharField(max_length=2, choices=DIRECTION_STATUS, blank=True, default='py', help_text='Направление курса')
     date_start = models.DateField(null=True, blank=True)
     date_start_registration = models.DateField('Начало регистрации', null=True, blank=True)
 
@@ -63,7 +65,10 @@ class Courses(models.Model):
     duration = models.IntegerField(null=True, blank=True)
     description = models.TextField(null=True, max_length=2000, help_text="Описание курса")
 
-class CourseParticipants(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
-    id_course = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True) 
+    created = DateTimeField(auto_now_add=True)
+    updated = DateTimeField(auto_now=True)
+
+# class CourseParticipants(models.Model):
+#     id_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
+#     id_course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True) 
 
