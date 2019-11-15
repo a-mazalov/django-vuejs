@@ -43,7 +43,7 @@ const redirectLogout = (to, from, next) => {
 
 export default [{
 		path: '/',
-		component: Login
+		redirect: '/home',
 	},
 	{
 		path: '/about',
