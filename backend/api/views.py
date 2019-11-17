@@ -35,7 +35,6 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
-
 class UserViewSet(ModelViewSet):
 
     queryset = User.objects.all()

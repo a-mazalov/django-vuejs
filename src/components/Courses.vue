@@ -1,6 +1,9 @@
 <template>
-	<v-container>
-		
+	<v-container style="margin-top: 60px;">
+		<h1>Курсы</h1>
+		<div v-for="course in courses" :key="course.id">
+			{{ course }}
+		</div>
 	</v-container>
 </template>
 
@@ -8,7 +11,7 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-	name: "Messages",
+	name: "Courses",
 	data() {
 		return {
 			subject: "",
@@ -16,11 +19,12 @@ export default {
 		};
 	},
 	computed: mapState({
-		messages: state => state.messages.messages
+		courses: state => state.courses.courses
 	}),
-	methods: mapActions("messages", ["addMessage", "deleteMessage"]),
+	methods: mapActions("courses", ["addCourse", "deleteCourse"]),
 	created() {
-		this.$store.dispatch("messages/getMessages");
+		this.$store.dispatch("courses/getCourses");
+		console.log(this.courses);
 	}
 };
 </script>

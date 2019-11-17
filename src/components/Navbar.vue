@@ -1,44 +1,26 @@
 <template>
-	<ul class="navbar" id="navbar">
-		<li>
-			<router-link to="/logout">logout</router-link>
-		</li>
-		<li>
-			<router-link to="/about">about</router-link>
-		</li>
-	</ul>
+	<v-app-bar app color="white" elevate-on-scroll
+      scroll-target="#view">
+		<v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+		<v-toolbar-title>Главная</v-toolbar-title>
+
+		<v-spacer></v-spacer>
+
+		<v-btn icon link to="/about">
+			<v-icon>fa-address-card</v-icon>
+		</v-btn>
+		<v-btn icon link to="/logout">
+			<v-icon>fa-sign-out-alt</v-icon>
+		</v-btn>
+	</v-app-bar>
 </template>
 
 <script>
-export default {
-	name: "navbar"
-};
+	export default {
+		name: "navbar"
+	};
 </script>
 
 <style scoped>
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-li {
-	display: inline;
-	float: right;
-}
-
-a {
-	color: #1a1a1a;
-	display: inline-block;
-	text-align: center;
-	padding: 6px 12px;
-	text-decoration: none;
-	font-size: 14px;
-}
-
-a:hover {
-	color: #cc0000;
-	text-decoration: none;
-}
 </style>

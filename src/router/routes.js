@@ -2,6 +2,7 @@
 
 import HelloWorld from '@/components/HelloWorld'
 import Messages from '@/components/Messages'
+import Courses from '@/components/Courses'
 
 import About from '@/views/About';
 import Home from '@/views/Home';
@@ -84,6 +85,11 @@ export default [{
 		path: '/messages',
 		name: 'messages',
 		component: Messages
+	},
+	{
+		path: '/courses',
+		name: 'courses',
+		component: Courses
 	},
 	{
 		path: '*',
