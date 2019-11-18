@@ -59,9 +59,9 @@
 										label="Пароль"
 										required
 										prepend-inner-icon="fa-lock"
-										:type="showPassword ? 'text' : 'password'"
-										:append-icon="showPassword ? 'fa-eye' : 'fa-eye-slash'"
-										@click:append="showPassword = !showPassword"
+										:type="showPassword1 ? 'text' : 'password'"
+										:append-icon="showPassword1 ? 'fa-eye' : 'fa-eye-slash'"
+										@click:append="showPassword1 = !showPassword1"
 									></v-text-field>
 									<v-text-field
 										outlined
@@ -70,9 +70,9 @@
 										label="Подтвердите пароль"
 										required
 										prepend-inner-icon="fa-lock"
-										:type="showPassword ? 'text' : 'password'"
-										:append-icon="showPassword ? 'fa-eye' : 'fa-eye-slash'"
-										@click:append="showPassword = !showPassword"
+										:type="showPassword2 ? 'text' : 'password'"
+										:append-icon="showPassword2 ? 'fa-eye' : 'fa-eye-slash'"
+										@click:append="showPassword2 = !showPassword2"
 									></v-text-field>
 									<v-text-field
 										outlined

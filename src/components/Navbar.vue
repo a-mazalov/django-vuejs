@@ -1,6 +1,5 @@
 <template>
-	<v-app-bar app color="white" elevate-on-scroll
-      scroll-target="#view">
+	<v-app-bar app elevation-1 elevate-on-scroll color="#edf1f7">
 		<v-app-bar-nav-icon></v-app-bar-nav-icon>
 
 		<v-toolbar-title>Главная</v-toolbar-title>
