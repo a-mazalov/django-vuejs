@@ -32,6 +32,12 @@ const actions = {
 	}, msgId) {
 		courseService.deleteCourse(msgId)
 		commit('deleteCourse', msgId)
+	},
+	joinCourse({
+		commit
+	}, crsId, data) {
+		courseService.joinCourse(crsId, data)
+		commit('joinCourse', crsId, data)
 	}
 }
 
@@ -44,6 +50,10 @@ const mutations = {
 	},
 	deleteCourse(state, msgId) {
 		state.courses = state.courses.filter(obj => obj.pk !== msgId)
+	},
+	joinCourse(state, crsId) {
+		console.log(state, crsId);
+		// state.courses = state.course.map(obj => obj.pk !== crsId)
 	}
 }
 

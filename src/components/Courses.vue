@@ -23,6 +23,9 @@
 						<v-card-actions>
 							<v-btn text>Подробнее</v-btn>
 						</v-card-actions>
+						<v-card-actions @click="joinTo(course.id)">
+							<v-btn text>Вступить</v-btn>
+						</v-card-actions>
 					</v-card>
 				</v-col>
 			</v-row>
@@ -44,7 +47,18 @@ export default {
 	computed: mapState({
 		courses: state => state.courses.courses
 	}),
-	methods: mapActions("courses", ["addCourse", "deleteCourse"]),
+	methods: {
+		...mapActions("courses", ["addCourse", "deleteCourse"]),
+
+		joinTo(crsId){
+			let data = {
+				members: 2
+			}
+			this.$store.dispatch("courses/joinCourse", crsId, data);
+		}
+		
+	},
+
 	created() {
 		this.$store.dispatch("courses/getCourses");
 		console.log(this.courses);

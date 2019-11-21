@@ -83,12 +83,12 @@ class PostViewSet(ModelViewSet):
 
 class CourseViewSet(ModelViewSet):
 
-    queryset = Course.objects.order_by('-created')
+    queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
     permission_classes = (
         IsAuthenticated,
-        AdminOrAuthorCanEdit,
+        # AdminOrAuthorCanEdit,
     )
 
     def perform_create(self, serializer):

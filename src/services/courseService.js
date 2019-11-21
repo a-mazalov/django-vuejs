@@ -12,5 +12,13 @@ export default {
 	deleteCourse(msgId) {
 		return api.delete(`courses/${msgId}`)
 			.then(response => response.data)
+	},
+	joinCourse(crsId, payload) {
+		return api.put(`courses/${crsId}/`, payload)
+			.then(response => response.data)
 	}
+	// joinCourse(crsId) {
+	// 	return api.put(`courses/${crsId}`)
+	// 		.then(response => response.data)
+	// }
 }
