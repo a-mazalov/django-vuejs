@@ -40,31 +40,31 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    permission_classes = (
-        IsAuthenticated,
-    )
+    # permission_classes = (
+    #     IsAuthenticated,
+    # )
 
     # Детеил для /api/users/2/posts/
-    @detail_route(methods=['get'])
-    def posts(self, request, pk=None):
-        queryset = Post.objects.filter(author__pk=pk).order_by('-created')
+    # @detail_route(methods=['get'])
+    # def posts(self, request, pk=None):
+    #     queryset = Post.objects.filter(author__pk=pk).order_by('-created')
 
-        context = {'request': request}
+    #     context = {'request': request}
 
-        serializer = PostSerializer(queryset, context=context, many=True)
+    #     serializer = PostSerializer(queryset, context=context, many=True)
 
-        return Response(serializer.data)
+    #     return Response(serializer.data)
 
-    # Детеил /api/users/2/posts/
-    @detail_route(methods=['get'])
-    def courses(self, request, pk=None):
-        queryset = Course.objects.filter(members__pk=pk).order_by('-created')
+    # # Детеил /api/users/2/posts/
+    # @detail_route(methods=['post'])
+    # def courses(self, request, pk=None):
+    #     queryset = Course.objects.filter(courses__pk=pk).order_by('-created')
 
-        context = {'request': request}
+    #     context = {'request': request}
 
-        serializer = CourseSerializer(queryset, context=context, many=True)
+    #     serializer = CourseSerializer(queryset, context=context, many=True)
 
-        return Response(serializer.data)
+    #     return Response(serializer.data)
 
 
 class PostViewSet(ModelViewSet):

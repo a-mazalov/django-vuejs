@@ -12,21 +12,13 @@ from .models import (
 )
 
 
-
-
 class CourseSerializer(ModelSerializer):
     # members = HyperlinkedRelatedField(view_name='course-detail', read_only=True)
-
-    members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
-    def get_validation_exclusions(self, *args, **kwargs):
-        # exclude the author field as we supply it later on in the
-        # corresponding view based on the http request
-        exclusions = super(CourseSerializer, self).get_validation_exclusions(*args, **kwargs)
-        return exclusions + ['members']
-
-    class Meta:
-        model = Course
-        fields = '__all__'
+    # members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
+        #fields = '__all__'
+	class Meta:
+		model = Course
+		fields = '__all__'
 
 class PostSerializer(ModelSerializer):
     author = HyperlinkedRelatedField(view_name='user-detail', read_only=True)
@@ -44,9 +36,9 @@ class PostSerializer(ModelSerializer):
 
 class UserSerializer(ModelSerializer):
 
-    posts = PostSerializer(many=True, read_only=True)
+    #posts = PostSerializer(many=True, read_only=True)
     # Должно совпадать с Model
-    courses = CourseSerializer(many=True)
+    #courses = CourseSerializer(many=True)
 
     class Meta:
         model = User
@@ -56,5 +48,6 @@ class UserSerializer(ModelSerializer):
         #     'username',
         #     'first_name',
         #     'last_name',
-        #     'posts',
+		# 	'posts',
+        #     'courses',
         # )

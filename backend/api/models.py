@@ -24,13 +24,8 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
         model = Message
         fields = ('url', 'subject', 'body', 'pk')
 
-
-class User(AbstractUser):
-    followers = ManyToManyField('self', related_name='followees', symmetrical=False)
-
-
 class Post(Model):
-    author = ForeignKey(User, related_name='posts', on_delete=CASCADE)
+    author = ForeignKey('User', related_name='posts', on_delete=CASCADE)
 
     created = DateTimeField(auto_now_add=True)
     content = TextField(blank=True, null=True)
@@ -38,8 +33,8 @@ class Post(Model):
     updated = DateTimeField(auto_now=True)
 
 
-class Course(models.Model):
-    members = ManyToManyField(User, related_name='courses', blank=True)
+class Course(Model):
+    # members = ForeignKey(User, related_name='courses', on_delete=CASCADE)
 
     name = models.CharField(max_length=200)
     
@@ -68,3 +63,8 @@ class Course(models.Model):
     created = DateTimeField(auto_now_add=True)
     updated = DateTimeField(auto_now=True)
 
+
+
+class User(AbstractUser):
+	followers = ManyToManyField('self', related_name='followees', symmetrical=False)
+	courses = ManyToManyField(Course)
