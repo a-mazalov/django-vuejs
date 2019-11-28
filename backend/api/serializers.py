@@ -13,9 +13,11 @@ from .models import (
 
 
 class CourseSerializer(ModelSerializer):
+	# users = UserSerializer(many=True)
     # members = HyperlinkedRelatedField(view_name='course-detail', read_only=True)
     # members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
-        #fields = '__all__'
+	#fields = '__all__'
+	
 	class Meta:
 		model = Course
 		fields = '__all__'
@@ -38,7 +40,7 @@ class UserSerializer(ModelSerializer):
 
     #posts = PostSerializer(many=True, read_only=True)
     # Должно совпадать с Model
-    #courses = CourseSerializer(many=True)
+    courses = CourseSerializer(many=True)
 
     class Meta:
         model = User
@@ -51,3 +53,14 @@ class UserSerializer(ModelSerializer):
 		# 	'posts',
         #     'courses',
         # )
+
+
+class CourseSerializer(ModelSerializer):
+
+	users = UserSerializer(many=True)
+    # members = HyperlinkedRelatedField(view_name='course-detail', read_only=True)
+    # members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
+        #fields = '__all__'
+	class Meta:
+		model = Course
+		fields = '__all__'
