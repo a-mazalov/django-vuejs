@@ -16,6 +16,7 @@ const actions = {
 	}) {
 		courseService.fetchCourses()
 			.then(courses => {
+				console.log(courses);
 				commit('setCourses', courses)
 			})
 	},

@@ -91,8 +91,8 @@ class CourseViewSet(ModelViewSet):
         # AdminOrAuthorCanEdit,
     )
 
-    def perform_create(self, serializer):
-        serializer.save(members=self.request.user)
-        return super(CourseViewSet, self).perform_create(serializer)
+    # def perform_create(self, serializer):
+    #     serializer.save(members=self.request.user)
+    #     return super(CourseViewSet, self).perform_create(serializer)
 
 

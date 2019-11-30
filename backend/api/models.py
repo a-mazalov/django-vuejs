@@ -36,29 +36,27 @@ class Post(Model):
 class Course(Model):
 	# members = ForeignKey(User, related_name='courses', on_delete=CASCADE)
 
-	users = ManyToManyField('User', related_name='users_courses', symmetrical=True)
-
 	name = models.CharField(max_length=200)
 	
 	DIRECTION_STATUS = (
-		('h', 'html'),
-		('j', 'js'),
-		('p', 'php'),
-		('py', 'python'),
+		('html5', 'html'),
+		('javascript', 'js'),
+		('php', 'php'),
+		('python', 'python'),
 	)
 
-	direction = models.CharField(max_length=2, choices=DIRECTION_STATUS, blank=True, default='py', help_text='Направление курса')
+	direction = models.CharField(max_length=200,choices=DIRECTION_STATUS, blank=True, default='py', help_text='Направление курса')
 	date_start = models.DateField(null=True, blank=True)
 	date_start_registration = models.DateField('Начало регистрации', null=True, blank=True)
 
 	LEVEL_STATUS = (
-		('j', 'Junior'),
-		('m', 'Middle'),
-		('s', 'Senior'),
-		('l', 'Lead'),
+		('Начинающий', 'Junior'),
+		('Средний', 'Middle'),
+		('Увереный', 'Senior'),
+		('Опытный', 'Lead'),
 	)
 
-	level = models.CharField(max_length=1, choices=LEVEL_STATUS, blank=True, default='j', help_text='Уровень курса')
+	level = models.CharField(max_length=200, choices=LEVEL_STATUS, blank=True, default='j', help_text='Уровень курса')
 	duration = models.IntegerField(null=True, blank=True)
 	description = models.TextField(null=True, max_length=2000, help_text="Описание курса")
 
@@ -69,4 +67,4 @@ class Course(Model):
 
 class User(AbstractUser):
 	# followers = ManyToManyField('self', related_name='followees', symmetrical=False)
-	courses = ManyToManyField(Course)
+	courses = ManyToManyField(Course, blank=True)

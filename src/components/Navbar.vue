@@ -1,6 +1,8 @@
 <template>
-	<v-app-bar app elevation-1 elevate-on-scroll color="#edf1f7">
-		<v-app-bar-nav-icon></v-app-bar-nav-icon>
+	<v-app-bar app elevation-1 class="px-5">
+		<v-btn icon link to="/">
+			<v-icon>fa-graduation-cap</v-icon>
+		</v-btn>
 
 		<v-toolbar-title>Главная</v-toolbar-title>
 

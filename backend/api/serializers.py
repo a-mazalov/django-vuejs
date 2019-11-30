@@ -1,66 +1,58 @@
 from rest_framework.serializers import (
-    HyperlinkedIdentityField,
-    HyperlinkedRelatedField,
-    PrimaryKeyRelatedField,
-    ModelSerializer,
+	HyperlinkedIdentityField,
+	HyperlinkedRelatedField,
+	PrimaryKeyRelatedField,
+	ModelSerializer,
 )
 
 from .models import (
-    User,
-    Post,
-    Course,
+	User,
+	Post,
+	Course,
 )
 
 
+
+class PostSerializer(ModelSerializer):
+	author = HyperlinkedRelatedField(view_name='user-detail', read_only=True)
+
+	def get_validation_exclusions(self, *args, **kwargs):
+		# exclude the author field as we supply it later on in the
+		# corresponding view based on the http request
+		exclusions = super(PostSerializer, self).get_validation_exclusions(*args, **kwargs)
+		return exclusions + ['author']
+
+	class Meta:
+		model = Post
+		fields = '__all__'
+
 class CourseSerializer(ModelSerializer):
-	# users = UserSerializer(many=True)
-    # members = HyperlinkedRelatedField(view_name='course-detail', read_only=True)
-    # members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
-	#fields = '__all__'
-	
+	# users = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+	# users = HyperlinkedRelatedField(source='user.courses', view_name="us", many=True, read_only=True)
+	# members = UserSerializer(many=True)
+	# users = UserSerializer(many=True, read_only=True)
+	# members = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+		#fields = '__all__'
 	class Meta:
 		model = Course
 		fields = '__all__'
-
-class PostSerializer(ModelSerializer):
-    author = HyperlinkedRelatedField(view_name='user-detail', read_only=True)
-
-    def get_validation_exclusions(self, *args, **kwargs):
-        # exclude the author field as we supply it later on in the
-        # corresponding view based on the http request
-        exclusions = super(PostSerializer, self).get_validation_exclusions(*args, **kwargs)
-        return exclusions + ['author']
-
-    class Meta:
-        model = Post
-        fields = '__all__'
-
 
 class UserSerializer(ModelSerializer):
 
-    #posts = PostSerializer(many=True, read_only=True)
-    # Должно совпадать с Model
-    courses = CourseSerializer(many=True)
+	#posts = PostSerializer(many=True, read_only=True)
+	# Должно совпадать с Model
+	courses = CourseSerializer(many=True)
 
-    class Meta:
-        model = User
-        fields = '__all__'
-        # fields = (
-        #     'id',
-        #     'username',
-        #     'first_name',
-        #     'last_name',
-		# 	'posts',
-        #     'courses',
-        # )
-
-
-class CourseSerializer(ModelSerializer):
-
-	users = UserSerializer(many=True)
-    # members = HyperlinkedRelatedField(view_name='course-detail', read_only=True)
-    # members = PrimaryKeyRelatedField(queryset=Course.objects.all(), many=True)
-        #fields = '__all__'
 	class Meta:
-		model = Course
+		model = User
 		fields = '__all__'
+		# fields = (
+		#     'id',
+		#     'username',
+		#     'first_name',
+		#     'last_name',
+		# 	'posts',
+		#     'courses',
+		# )
+
+
