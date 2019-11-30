@@ -36,6 +36,8 @@ class Post(Model):
 class Course(Model):
 	# members = ForeignKey(User, related_name='courses', on_delete=CASCADE)
 
+	# members = ForeignKey('User', on_delete=CASCADE)
+
 	name = models.CharField(max_length=200)
 	
 	DIRECTION_STATUS = (
@@ -63,8 +65,12 @@ class Course(Model):
 	created = DateTimeField(auto_now_add=True)
 	updated = DateTimeField(auto_now=True)
 
-
+	def __str__(self):
+		return self.name
 
 class User(AbstractUser):
 	# followers = ManyToManyField('self', related_name='followees', symmetrical=False)
 	courses = ManyToManyField(Course, blank=True)
+
+	def __str__(self):
+		return self.username

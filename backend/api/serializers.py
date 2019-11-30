@@ -26,22 +26,14 @@ class PostSerializer(ModelSerializer):
 		model = Post
 		fields = '__all__'
 
-class CourseSerializer(ModelSerializer):
-	# users = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
-	# users = HyperlinkedRelatedField(source='user.courses', view_name="us", many=True, read_only=True)
-	# members = UserSerializer(many=True)
-	# users = UserSerializer(many=True, read_only=True)
-	# members = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
-		#fields = '__all__'
-	class Meta:
-		model = Course
-		fields = '__all__'
 
 class UserSerializer(ModelSerializer):
 
-	#posts = PostSerializer(many=True, read_only=True)
+	# posts = PostSerializer(many=True,read_only=True)
 	# Должно совпадать с Model
-	courses = CourseSerializer(many=True)
+
+	# Если есть связь в Model то указывать не нужно (может не отображатся в форме)
+	# courses = CourseSerializer(many=True,read_only=True)
 
 	class Meta:
 		model = User
@@ -56,3 +48,16 @@ class UserSerializer(ModelSerializer):
 		# )
 
 
+class CourseSerializer(ModelSerializer):
+
+
+
+	# users = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+	# users = HyperlinkedRelatedField(User, many=True, read_only=True)
+	# user = UserSerializer(many=True)
+	# users = UserSerializer(many=True, read_only=True)
+	# members = PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+		#fields = '__all__'
+	class Meta:
+		model = Course
+		fields = '__all__'
