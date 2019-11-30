@@ -92,7 +92,7 @@ class CourseViewSet(ModelViewSet):
 	serializer_class = CourseSerializer
 
 	permission_classes = (
-		IsAuthenticated,
+		# IsAuthenticated,
 		# AdminOrAuthorCanEdit,
 	)
 
@@ -104,13 +104,30 @@ class CourseViewSet(ModelViewSet):
 	def followCourse(self, request, pk, format=None):
 		print('====================')
 		print(pk)
-		# api/users/2 (pk) /followCourse/
+		# api/courses/2 (pk) /followCourse/
 
 		# Найти модель курса
 		course = Course.objects.filter(id=pk).get()
 
 		# Добавить ее пользователю
 		user = self.request.user.courses.add(course)
+
+		context = {'request': request}
+		serializer = UserSerializer(user, context=context, many=True)
+
+		return Response(serializer.data)
+
+	@detail_route(methods=['delete'])
+	def followCourse(self, request, pk, format=None):
+		print('========REMOVE FOLLOW========')
+		print(pk)
+		# api/courses/2 (pk) /followCourse/
+
+		# Найти модель курса
+		course = Course.objects.filter(id=pk).get()
+
+		# Добавить ее пользователю
+		user = self.request.user.courses.remove(course)
 
 		context = {'request': request}
 		serializer = UserSerializer(user, context=context, many=True)

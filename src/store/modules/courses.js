@@ -36,9 +36,15 @@ const actions = {
 	},
 	joinCourse({
 		commit
-	}, crsId, data) {
-		courseService.joinCourse(crsId, data)
-		commit('joinCourse', crsId, data)
+	}, crsId) {
+		courseService.joinCourse(crsId)
+		commit('joinCourse', crsId)
+	},
+	outCourse({
+		commit
+	}, crsId) {
+		courseService.outCourse(crsId)
+		commit('outCourse', crsId)
 	}
 }
 
@@ -53,6 +59,10 @@ const mutations = {
 		state.courses = state.courses.filter(obj => obj.pk !== msgId)
 	},
 	joinCourse(state, crsId) {
+		console.log(state, crsId);
+		// state.courses = state.course.map(obj => obj.pk !== crsId)
+	},
+	outCourse(state, crsId) {
 		console.log(state, crsId);
 		// state.courses = state.course.map(obj => obj.pk !== crsId)
 	}

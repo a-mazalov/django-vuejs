@@ -4,7 +4,7 @@
 			<v-row justify="center" align="center" no-gutters>
 				<v-col>
 					<div>
-						<h1 class="display-3">Доступные курсы</h1>
+						<h1 class="display-3">Доступные курсы {{ user.username }}</h1>
 						<!-- <v-divider width="350px"></v-divider> -->
 					</div>
 				</v-col>
@@ -22,6 +22,7 @@
 				<v-divider style="max-width:100%"></v-divider>
 			</v-row>
 		</v-container>
+		
 		<v-container>
 			<v-row justify="start" align="start">
 				<!-- {{ courses }} -->
@@ -52,7 +53,8 @@
 						<v-card-actions>
 							<v-btn text outlined>Подробнее</v-btn>
 							<v-spacer></v-spacer>
-							<v-btn text @click="joinTo(course.id)" color="primary" >Участвовать</v-btn>
+							<v-btn text @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
+							<v-btn text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -63,13 +65,15 @@
 
 <script>
 	import { mapState, mapActions } from "vuex";
+	import auth from '../api/auth';
 
 	export default {
 		name: "Courses",
 		data() {
 			return {
 				subject: "",
-				msgBody: ""
+				msgBody: "",
+				user: null,
 			};
 		},
 		computed: {
@@ -80,11 +84,11 @@
 		methods: {
 			...mapActions("courses", ["addCourse", "deleteCourse"]),
 
-			joinTo(crsId) {
-				let data = {
-					members: 2
-				};
-				this.$store.dispatch("courses/joinCourse", crsId, data);
+			followCourse(crsId) {
+				this.$store.dispatch("courses/joinCourse", crsId);
+			},
+			unFollowCourse(crsId) {
+				this.$store.dispatch("courses/outCourse", crsId);
 			},
 
 			coloredIcons(language) {
@@ -97,6 +101,9 @@
 					case "python":
 						color = "primary";
 						break;
+					case "php":
+						color = "deep-purple lighten-1";
+						break;
 				}
 
 				return color;
@@ -104,6 +111,10 @@
 		},
 
 		created() {
+
+			auth.getAccountDetails().then(response =>
+				this.user = response.data
+			)
 			this.$store.dispatch("courses/getCourses");
 			console.log(this.courses);
 		}
