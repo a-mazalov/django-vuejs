@@ -6,6 +6,7 @@ import router from '@/router'
 import vuetify from './plugins/vuetify';
 import moment from "moment"
 
+moment.locale('ru');
 Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
 

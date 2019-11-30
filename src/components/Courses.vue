@@ -45,7 +45,7 @@
 							</div>
 							<div>
 								<v-icon class="mr-2">mdi-update</v-icon>
-								<span class="body-1">Дата старта: {{ course.date_start }}</span>
+								<span class="body-1">Дата старта: {{ $moment(course.date_start).format('Do MMMM') }}</span>
 							</div>
 						</v-card-text>
 

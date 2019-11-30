@@ -1,5 +1,5 @@
 <template>
-	<v-app-bar app elevation-1 class="px-5">
+	<v-app-bar app flat class="px-5" color="transparent">
 		<v-btn icon link to="/">
 			<v-icon>fa-graduation-cap</v-icon>
 		</v-btn>
