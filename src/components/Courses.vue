@@ -29,13 +29,8 @@
 					<v-card>
 						<v-list-item three-line>
 							<v-list-item-content>
-								<div class="overline mb-4">{{ course.created }}</div>
+								<div class="caption mb-4">{{ $moment(course.created).format('DD.MM.YYYY') }}</div>
 								<v-list-item-title class="headline mb-2">{{ course.name }}</v-list-item-title>
-								<v-list-item-subtitle>{{ course.description }}</v-list-item-subtitle>
-								<v-list-item-subtitle>{{ course.direction }}</v-list-item-subtitle>
-								<v-list-item-subtitle class="subtitle-1">Уровень: {{ course.level }}</v-list-item-subtitle>
-								<v-list-item-subtitle class="subtitle-1">Дата начала: {{ course.date_start }}</v-list-item-subtitle>
-								<!-- <v-list-item-subtitle>Кол-во участников: {{ course.users.length }}</v-list-item-subtitle> -->
 							</v-list-item-content>
 
 							<v-list-item-avatar size="80">
@@ -43,10 +38,21 @@
 							</v-list-item-avatar>
 						</v-list-item>
 
+						<v-card-text>
+							<div>
+								<v-icon class="mr-2">mdi-account-star</v-icon>
+								<span class="body-1">Уровень: {{ course.level }}</span>
+							</div>
+							<div>
+								<v-icon class="mr-2">mdi-update</v-icon>
+								<span class="body-1">Дата старта: {{ course.date_start }}</span>
+							</div>
+						</v-card-text>
+
 						<v-card-actions>
-							<v-btn text>Подробнее</v-btn>
+							<v-btn text outlined>Подробнее</v-btn>
 							<v-spacer></v-spacer>
-							<v-btn text @click="joinTo(course.id)">Вступить</v-btn>
+							<v-btn text @click="joinTo(course.id)" color="primary" >Участвовать</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -92,7 +98,7 @@
 						color = "primary";
 						break;
 				}
-				
+
 				return color;
 			}
 		},
