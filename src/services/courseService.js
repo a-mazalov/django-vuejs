@@ -18,7 +18,7 @@ export default {
 			.then(response => response.data)
 	},
 	outCourse(crsId) {
-		return api.delete(`courses/${crsId}/followCourse`)
+		return api.delete(`courses/${crsId}/unfollowCourse`)
 			.then(response => response.data)
 	}
 	// joinCourse(crsId) {

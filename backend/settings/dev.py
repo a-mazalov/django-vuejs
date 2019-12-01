@@ -111,6 +111,10 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'api.User'
 
+# REST_AUTH_SERIALIZERS = {
+#     'USER_DETAILS_SERIALIZER': 'backend.api.serializers.UserSerializer',
+# }
+
 # SECURITY WARNING: don't use AlwaysRootBackend in production
 # AUTHENTICATION_BACKENDS = ['server.auth.AlwaysRootBackend']
 

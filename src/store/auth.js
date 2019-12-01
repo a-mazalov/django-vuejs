@@ -15,6 +15,7 @@ const initialState = {
 	authenticating: false,
 	error: false,
 	token: null,
+	userInfo: null,
 };
 
 const getters = {
@@ -30,10 +31,14 @@ const actions = {
 	}) {
 		commit(LOGIN_BEGIN);
 		return auth.login(username, password)
-			.then(({
-				data
-			}) => commit(SET_TOKEN, data.key))
-			.then(() => commit(LOGIN_SUCCESS))
+			.then( ({data}) => commit(SET_TOKEN, data.key) )
+			.then(() => {
+
+				auth.getAccountDetails().then(response =>
+					commit(LOGIN_SUCCESS, response.data)
+				)
+				
+			})
 			.catch(() => commit(LOGIN_FAILURE));
 	},
 	logout({
@@ -65,9 +70,10 @@ const mutations = {
 		state.authenticating = false;
 		state.error = true;
 	},
-	[LOGIN_SUCCESS](state) {
+	[LOGIN_SUCCESS](state, info) {
 		state.authenticating = false;
 		state.error = false;
+		state.userInfo = info;
 	},
 	[LOGOUT](state) {
 		state.authenticating = false;

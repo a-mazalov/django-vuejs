@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from django.views.decorators.cache import never_cache
 from rest_framework import viewsets
 
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -100,7 +100,7 @@ class CourseViewSet(ModelViewSet):
 	# 	user = self.request.user
 	# 	return User.courses_set.all()
 
-	@detail_route(methods=['get'])
+	@action(detail=True, methods=['get'], name='Follow Group')
 	def followCourse(self, request, pk, format=None):
 		print('====================')
 		print(pk)
@@ -117,8 +117,8 @@ class CourseViewSet(ModelViewSet):
 
 		return Response(serializer.data)
 
-	@detail_route(methods=['delete'])
-	def followCourse(self, request, pk, format=None):
+	@action(detail=True, methods=['delete'], name='Unfollow Group')
+	def unfollowCourse(self, request, pk, format=None):
 		print('========REMOVE FOLLOW========')
 		print(pk)
 		# api/courses/2 (pk) /followCourse/
@@ -133,6 +133,7 @@ class CourseViewSet(ModelViewSet):
 		serializer = UserSerializer(user, context=context, many=True)
 
 		return Response(serializer.data)
+
 
 	# def perform_create(self, serializer):
 	#     serializer.save(members=self.request.user)
