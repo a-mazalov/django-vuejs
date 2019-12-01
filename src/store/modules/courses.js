@@ -1,5 +1,5 @@
 import courseService from '../../services/courseService'
-
+import store from '@/store'
 const state = {
 	courses: []
 }
@@ -16,7 +16,11 @@ const actions = {
 	}) {
 		courseService.fetchCourses()
 			.then(courses => {
-				console.log(courses);
+
+
+
+
+
 				commit('setCourses', courses)
 			})
 	},
@@ -50,6 +54,24 @@ const actions = {
 
 const mutations = {
 	setCourses(state, courses) {
+
+		// console.log('STORE CR', this.$store.state.auth.userInfo.courses);
+		console.log('STORE CR', store.getters['auth/userInfo'].courses);
+
+		if (store.getters['auth/userInfo'].courses) {
+			for (let user_in_course of store.getters['auth/userInfo'].courses) {
+				for (let item of courses) {
+					console.log(item.id, user_in_course);
+					if (item.id == user_in_course) {
+						item.isFollow = true;
+					}
+				}
+			}
+		}
+
+
+
+
 		state.courses = courses
 	},
 	addCourse(state, course) {

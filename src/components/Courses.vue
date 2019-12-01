@@ -4,7 +4,7 @@
 			<v-row justify="center" align="center" no-gutters>
 				<v-col>
 					<div>
-						<h1 class="display-3">Доступные курсы {{ user.username }}</h1>
+						<h1 class="display-3">Доступные курсы</h1>
 						<!-- <v-divider width="350px"></v-divider> -->
 					</div>
 				</v-col>
@@ -22,8 +22,8 @@
 				<v-divider style="max-width:100%"></v-divider>
 			</v-row>
 		</v-container>
-		
-		<v-container>
+
+		<v-container v-if="courses">
 			<v-row justify="start" align="start">
 				<!-- {{ courses }} -->
 				<v-col cols="12" sm="6" md="6" lg="4" v-for="course in courses" :key="course.id">
@@ -53,8 +53,8 @@
 						<v-card-actions>
 							<v-btn text outlined link :to="'courses/'+course.id">Подробнее</v-btn>
 							<v-spacer></v-spacer>
-							<v-btn text @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
-							<v-btn text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
+							<v-btn v-if="course.isFollow" text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
+							<v-btn v-else text @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
 						</v-card-actions>
 					</v-card>
 				</v-col>
@@ -65,7 +65,7 @@
 
 <script>
 	import { mapState, mapActions } from "vuex";
-	import auth from '../api/auth';
+	import auth from "../api/auth";
 
 	export default {
 		name: "Courses",
@@ -73,7 +73,7 @@
 			return {
 				subject: "",
 				msgBody: "",
-				user: null,
+				user: null
 			};
 		},
 		computed: {
@@ -107,14 +107,21 @@
 				}
 
 				return color;
-			}
+			},
 		},
 
 		created() {
+			// console.log(
+			// 	"Мои курсы",
+			// 	this.$store.state.auth.userInfo.courses.find(
+			// 		obj => obj == 10
+			// 	)
+			// );
 
-			auth.getAccountDetails().then(response =>
-				this.user = response.data
-			)
+			// state.courses.courses.find(
+			// 	obj => obj.id == this.$route.params.id
+			// );
+
 			this.$store.dispatch("courses/getCourses");
 			console.log(this.courses);
 		}

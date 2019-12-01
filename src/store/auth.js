@@ -7,6 +7,7 @@ import {
 	LOGOUT,
 	REMOVE_TOKEN,
 	SET_TOKEN,
+	SET_USER_INFO,
 } from './types';
 
 const TOKEN_STORAGE_KEY = 'TOKEN_STORAGE_KEY';
@@ -20,6 +21,7 @@ const initialState = {
 
 const getters = {
 	isAuthenticated: state => !!state.token,
+	userInfo: state => state.userInfo
 };
 
 const actions = {
@@ -34,9 +36,7 @@ const actions = {
 			.then( ({data}) => commit(SET_TOKEN, data.key) )
 			.then(() => {
 
-				auth.getAccountDetails().then(response =>
-					commit(LOGIN_SUCCESS, response.data)
-				)
+
 				
 			})
 			.catch(() => commit(LOGIN_FAILURE));
@@ -54,8 +54,12 @@ const actions = {
 		const token = localStorage.getItem(TOKEN_STORAGE_KEY);
 
 		if (token) {
+
+			auth.getAccountDetails().then( ({data}) => commit(SET_USER_INFO, data) )
+
 			commit(SET_TOKEN, token);
 		} else {
+			auth.getAccountDetails().then( ({data}) => commit(SET_USER_INFO, null) )
 			commit(REMOVE_TOKEN);
 		}
 	},
@@ -89,6 +93,9 @@ const mutations = {
 		delete session.defaults.headers.Authorization;
 		state.token = null;
 	},
+	[SET_USER_INFO](state, data) {
+		state.userInfo = data;
+	}
 };
 
 export default {
