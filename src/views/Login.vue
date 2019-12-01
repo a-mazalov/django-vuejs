@@ -19,7 +19,9 @@
 				<button @click="login(inputs)" id="login-button">login</button>-->
 				<h4 class="text-center headline my-4">Войти в аккаунт</h4>
 
+				
 				<v-card class="mx-auto pa-4" max-width="480" shaped :elevation="5">
+					<v-alert v-if="login_fail" type="error">Ошибка авторизации. Неверный логин/пароль</v-alert>
 					<v-card-text>
 						<v-form ref="form" v-model="valid" class="pa-5">
 							<v-text-field
@@ -69,6 +71,7 @@ export default {
 		return {
 			valid: true,
 			showPassword: false,
+			login_fail: false,
 			inputs: {
 				username: "",
 				password: "",
@@ -88,9 +91,11 @@ export default {
 	},
 	methods: {
 		login({ username, password }) {
+			this.login_fail = false;
 			this.$store
 				.dispatch("auth/login", { username, password })
-				.then(() => this.$router.push("/"));
+				.then(() => this.$router.push("/"))
+				.catch(()=> this.login_fail = true);
 		}
 	}
 };

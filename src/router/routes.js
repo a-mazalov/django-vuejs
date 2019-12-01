@@ -3,6 +3,7 @@
 import HelloWorld from '@/components/HelloWorld'
 import Messages from '@/components/Messages'
 import Courses from '@/components/Courses'
+import CourseInfo from '@/components/CourseInfo'
 
 import About from '@/views/About';
 import Home from '@/views/Home';
@@ -89,7 +90,14 @@ export default [{
 	{
 		path: '/courses',
 		name: 'courses',
-		component: Courses
+		component: Courses,
+		beforeEnter: requireAuthenticated,
+	},
+	{
+		path: '/courses/:id',
+		name: 'CourseInfo',
+		component: CourseInfo,
+		beforeEnter: requireAuthenticated,
 	},
 	{
 		path: '*',

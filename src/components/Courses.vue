@@ -51,7 +51,7 @@
 						</v-card-text>
 
 						<v-card-actions>
-							<v-btn text outlined>Подробнее</v-btn>
+							<v-btn text outlined link :to="'courses/'+course.id">Подробнее</v-btn>
 							<v-spacer></v-spacer>
 							<v-btn text @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
 							<v-btn text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
