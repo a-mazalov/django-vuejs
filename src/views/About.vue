@@ -1,11 +1,7 @@
 <template>
-  <div id="about-view">
-    <h1>About</h1>
-  </div>
+	<Profile></Profile>
 </template>
 
 <script>
-export default {
-  name: 'about',
-};
+	// import HelloWorld from "../components/HelloWorld";
 </script>

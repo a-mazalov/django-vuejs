@@ -27,25 +27,6 @@ class PostSerializer(ModelSerializer):
 		fields = '__all__'
 
 
-class UserSerializer(ModelSerializer):
-
-	# posts = PostSerializer(many=True,read_only=True)
-	# Должно совпадать с Model
-
-	# Если есть связь в Model то указывать не нужно (может не отображатся в форме)
-	# courses = CourseSerializer(many=True,read_only=True)
-
-	class Meta:
-		model = User
-		fields = '__all__'
-		# fields = (
-		#     'id',
-		#     'username',
-		#     'first_name',
-		#     'last_name',
-		# 	'posts',
-		#     'courses',
-		# )
 
 
 class CourseSerializer(ModelSerializer):
@@ -61,3 +42,25 @@ class CourseSerializer(ModelSerializer):
 	class Meta:
 		model = Course
 		fields = '__all__'
+
+
+class UserSerializer(ModelSerializer):
+
+	# posts = PostSerializer(many=True,read_only=True)
+	# Должно совпадать с Model
+
+	# Если есть связь в Model то указывать не нужно (может не отображатся в форме)
+	courses = CourseSerializer(many=True,read_only=True)
+
+	class Meta:
+		model = User
+		fields = '__all__'
+		# fields = (
+		#     'id',
+		#     'username',
+		#     'first_name',
+		#     'last_name',
+		# 	'posts',
+		#     'courses',
+		# )
+

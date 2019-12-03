@@ -44,8 +44,8 @@
 
 						<v-card-actions>
 							<v-spacer></v-spacer>
-							<v-btn text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
-							<v-btn @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
+							<v-btn v-if="course.isFollow" text @click="unFollowCourse(course.id)" color="secondary">Отписаться</v-btn>
+							<v-btn v-else text @click="followCourse(course.id)" color="primary">Участвовать</v-btn>
 						</v-card-actions>
 					</v-card>
 

@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Messages from '@/components/Messages'
 import Courses from '@/components/Courses'
 import CourseInfo from '@/components/CourseInfo'
+import Profile from '@/components/Profile'
+
 
 import About from '@/views/About';
 import Home from '@/views/Home';
@@ -49,7 +51,7 @@ export default [{
 	},
 	{
 		path: '/about',
-		component: About,
+		component: Profile,
 		beforeEnter: requireAuthenticated,
 	},
 	{

@@ -62,7 +62,7 @@ const mutations = {
 			for (let user_in_course of store.getters['auth/userInfo'].courses) {
 				for (let item of courses) {
 					console.log(item.id, user_in_course);
-					if (item.id == user_in_course) {
+					if (item.id == user_in_course.id) {
 						item.isFollow = true;
 					}
 				}
